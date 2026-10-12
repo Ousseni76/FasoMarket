@@ -1,0 +1,263 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#075e45">
+<title>FasoMarket — Marketplace mondiale</title>
+<style>
+:root{--green:#075e45;--lime:#d7f5df;--bg:#f5f7f6;--text:#17231e;--muted:#64736b}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:var(--text)}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.top{background:#063d30;color:white;text-align:center;padding:8px;font-size:12px}
+header{background:white;position:sticky;top:0;z-index:5;box-shadow:0 2px 8px #0000000c}
+.head{max-width:1200px;margin:auto;padding:13px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.logo{font-size:22px;font-weight:900;color:var(--green);cursor:pointer}
+.logo span{color:#e69b20}
+.search{display:flex;flex:1;min-width:180px}
+.search input{width:100%;padding:12px;border:1px solid #dce4df;border-radius:9px 0 0 9px;min-width:0}
+.search button{background:var(--green);color:white;border:0;border-radius:0 9px 9px 0;padding:0 17px}
+.head button,.head select{border:1px solid #e0e6e2;background:white;border-radius:9px;padding:10px}
+nav{border-top:1px solid #edf0ee;display:flex;gap:20px;padding:10px 16px;overflow:auto;white-space:nowrap}
+nav a{color:#35463c;text-decoration:none;font-size:13px;cursor:pointer}
+main{max-width:1200px;margin:auto;padding:18px 14px}
+.hero{background:linear-gradient(115deg,#064b38,#13835b);color:white;border-radius:17px;padding:27px 22px;display:grid;grid-template-columns:1.5fr 1fr;gap:12px;align-items:center;overflow:hidden}
+.hero h1{font-size:clamp(26px,5vw,43px);margin:0 0 12px;line-height:1.12}
+.hero p{line-height:1.6;color:#e3f5e9}
+.hero .art{text-align:center;font-size:clamp(55px,12vw,105px)}
+.primary,.secondary{border:0;border-radius:9px;padding:12px 15px;font-weight:bold}
+.primary{background:#f4bd51;color:#382500}
+.secondary{background:var(--lime);color:var(--green)}
+.trust{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin:14px 0}
+.trust div{background:white;border-radius:10px;padding:12px 8px;text-align:center;font-size:12px}
+.trust b{display:block;font-size:20px;margin-bottom:5px}
+h2{font-size:20px;margin:25px 0 13px}
+.cats{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:9px}
+.cat{background:white;border:1px solid #e7ece8;border-radius:12px;padding:13px 4px;text-align:center;color:var(--text)}
+.cat .emoji{display:block;font-size:28px;margin-bottom:8px}
+.cat.active{border:2px solid var(--green);background:#eaf7ef}
+.toolbar{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap}
+.toolbar select{padding:10px;border:1px solid #dce4df;border-radius:9px;background:white}
+.products{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px}
+.card{background:white;border-radius:12px;overflow:hidden;border:1px solid #edf0ee;min-width:0}
+.productpic{height:145px;background:#eaf1ec;display:grid;place-items:center;font-size:60px;position:relative}
+.heart{position:absolute;top:8px;right:8px;border:0;background:white;border-radius:50%;width:35px;height:35px}
+.tag{position:absolute;left:8px;top:8px;background:#fff0d1;color:#774800;border-radius:5px;padding:5px;font-size:10px}
+.info{padding:12px}
+.info h3{font-size:14px;line-height:1.4;margin:0 0 7px;min-height:38px}
+.price{font-weight:800;color:var(--green);font-size:16px}
+.old{font-size:11px;color:#859088;text-decoration:line-through;margin-left:5px}
+.meta{font-size:11px;color:var(--muted);margin:8px 0 11px}
+.add{width:100%;border:0;background:var(--green);color:white;border-radius:8px;padding:10px 5px;font-size:12px;font-weight:bold}
+.panel{background:white;padding:15px;border-radius:12px;margin-top:15px}
+.cartrow{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid #eee;font-size:13px}
+.cartrow button{border:0;background:#fce9e7;color:#a22920;border-radius:5px;padding:5px}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.field{display:grid;gap:6px;margin-bottom:12px}
+.field input,.field select,.field textarea{padding:12px;border:1px solid #dce4df;border-radius:8px;width:100%;background:white}
+.hidden{display:none!important}
+.notice{background:#fff4d9;padding:12px;border-radius:9px;font-size:12px;line-height:1.5}
+footer{margin-top:35px;background:#073d30;color:#e6f2eb;padding:25px 16px}
+.footinner{max-width:1200px;margin:auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:20px}
+footer p,footer div{font-size:12px;line-height:1.8}
+footer button{background:transparent;color:white;border:1px solid #729b89;border-radius:7px;padding:8px}
+.empty{text-align:center;padding:28px;color:var(--muted);background:white;border-radius:10px}
+@media(max-width:800px){.products{grid-template-columns:repeat(3,minmax(0,1fr))}.cats{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:520px){.products{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.productpic{height:115px;font-size:48px}.info{padding:9px}.hero{grid-template-columns:1fr 80px;padding:20px 15px}.hero .art{font-size:55px}.trust{grid-template-columns:repeat(2,1fr)}.head{gap:8px}.logo{font-size:20px}.footinner{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="top">🌍 Une marketplace ouverte sur le monde · Prototype de démonstration</div>
+<header>
+ <div class="head">
+  <div class="logo" onclick="home()">🌐 Faso<span>Market</span></div>
+  <div class="search">
+   <input id="search" placeholder="Rechercher un produit..." oninput="renderProducts()">
+   <button onclick="renderProducts()">⌕</button>
+  </div>
+  <select id="currency" onchange="renderProducts();renderCart()" aria-label="Devise">
+   <option value="XOF">FCFA</option><option value="USD">USD $</option>
+   <option value="EUR">EUR €</option><option value="GBP">GBP £</option>
+  </select>
+  <button onclick="show('favorites')">♡ <span id="favCount">0</span></button>
+  <button onclick="show('cart')">🛒 <span id="cartCount">0</span></button>
+ </div>
+ <nav>
+  <a onclick="home()">Accueil</a><a onclick="choose('Tous')">Tous les produits</a>
+  <a onclick="choose('Habits')">Mode</a><a onclick="choose('Chaussures')">Chaussures</a>
+  <a onclick="choose('Téléphones')">Téléphones</a><a onclick="show('seller')">Vendre sur FasoMarket</a>
+ </nav>
+</header>
+
+<main>
+<section id="homePage">
+ <div class="hero">
+  <div>
+   <h1>Le monde du commerce à portée de main.</h1>
+   <p>Découvre des produits, compare les offres et prépare tes achats depuis un seul endroit.</p>
+   <button class="primary" onclick="document.getElementById('catalog').scrollIntoView({behavior:'smooth'})">Découvrir les produits →</button>
+  </div>
+  <div class="art">🛍️🌍</div>
+ </div>
+ <div class="trust">
+  <div><b>🌎</b>Vision internationale</div>
+  <div><b>🏪</b>Espace vendeur</div>
+  <div><b>♡</b>Liste de favoris</div>
+  <div><b>🛒</b>Panier interactif</div>
+ </div>
+ <h2>Explorer les catégories</h2>
+ <div class="cats" id="categories"></div>
+ <div id="catalog">
+  <div class="toolbar">
+   <h2 id="catalogTitle">Produits à découvrir</h2>
+   <select id="sort" onchange="renderProducts()">
+    <option value="recommended">Recommandés</option>
+    <option value="low">Prix croissant</option>
+    <option value="high">Prix décroissant</option>
+    <option value="name">Nom A à Z</option>
+   </select>
+  </div>
+  <div class="products" id="products"></div>
+ </div>
+</section>
+
+<section id="favorites" class="hidden">
+ <h2>♡ Mes favoris</h2><div id="favoriteProducts" class="products"></div>
+</section>
+
+<section id="cart" class="hidden">
+ <h2>🛒 Mon panier</h2>
+ <div class="panel" id="cartItems"></div>
+ <div class="panel">
+  <div class="cartrow"><b>Total estimé</b><b id="total">0 FCFA</b></div>
+  <p class="notice">Aucun paiement réel n'est effectué dans cette version. Le panier est enregistré uniquement dans ce navigateur.</p>
+  <div class="actions"><button class="primary" onclick="checkout()">Continuer la commande</button><button class="secondary" onclick="home()">Continuer les achats</button></div>
+ </div>
+</section>
+
+<section id="seller" class="hidden">
+ <h2>🏪 Espace vendeur — Ajouter un produit</h2>
+ <div class="panel">
+  <p>Ajoute un produit de démonstration à la boutique sur cet appareil.</p>
+  <form id="sellerForm">
+   <div class="field"><label for="pname">Nom du produit</label><input id="pname" required maxlength="80" placeholder="Ex. Sac de voyage"></div>
+   <div class="field"><label for="pcat">Catégorie</label><select id="pcat"><option>Habits</option><option>Chaussures</option><option>Téléphones</option><option>Maison</option><option>Accessoires</option></select></div>
+   <div class="field"><label for="pprice">Prix dans la devise choisie</label><input id="pprice" type="number" min="1" step="0.01" required placeholder="Ex. 25"></div>
+   <div class="field"><label for="pemoji">Icône du produit (emoji)</label><input id="pemoji" maxlength="8" value="📦"></div>
+   <button class="primary" type="submit">Ajouter au catalogue</button>
+  </form>
+  <p class="notice">Dans ce prototype, le produit est local à ton navigateur. Pour le vendre à de vrais clients, il faudra des comptes vendeurs, une base de données en ligne et un système de validation.</p>
+ </div>
+</section>
+
+<section id="checkout" class="hidden">
+ <h2>📦 Préparer une commande</h2>
+ <div class="panel">
+  <form id="orderForm">
+   <div class="field"><label for="customer">Nom du client</label><input id="customer" required></div>
+   <div class="field"><label for="email">Adresse e-mail</label><input id="email" type="email" required></div>
+   <div class="field"><label for="country">Pays de livraison</label><input id="country" required placeholder="Ex. Burkina Faso, France, Canada"></div>
+   <div class="field"><label for="address">Adresse de livraison</label><textarea id="address" required rows="3"></textarea></div>
+   <button class="primary" type="submit">Créer une demande de commande</button>
+  </form>
+  <p class="notice">Cette étape crée seulement une demande de démonstration. Elle ne transmet pas tes données à un vendeur et ne débite aucun paiement.</p>
+ </div>
+</section>
+</main>
+
+<footer>
+ <div class="footinner">
+  <div><b>🌐 FasoMarket</b><p>Un projet de marketplace pour connecter acheteurs et vendeurs à travers le monde.</p></div>
+  <div><b>Acheter</b><p>Catalogue<br>Favoris<br>Panier</p></div>
+  <div><b>Vendre</b><p>Ajouter un produit<br>Centre vendeur</p><button onclick="show('seller')">Devenir vendeur</button></div>
+ </div>
+ <p style="text-align:center">© 2026 FasoMarket · Prototype non transactionnel</p>
+</footer>
+
+<script>
+const seed=[
+{id:1,name:"T-shirt moderne",cat:"Habits",price:3500,emoji:"👕",tag:"Populaire"},
+{id:2,name:"Tenue élégante",cat:"Habits",price:12000,emoji:"👔",tag:"Style"},
+{id:3,name:"Baskets sport",cat:"Chaussures",price:10000,emoji:"👟",tag:"Sport"},
+{id:4,name:"Chaussures classiques",cat:"Chaussures",price:8500,emoji:"👞",tag:"Élégant"},
+{id:5,name:"Smartphone Android",cat:"Téléphones",price:65000,emoji:"📱",tag:"Tech"},
+{id:6,name:"Téléphone premium",cat:"Téléphones",price:95000,emoji:"📲",tag:"Tech"},
+{id:7,name:"Sac de voyage",cat:"Accessoires",price:18000,emoji:"👜",tag:"Voyage"},
+{id:8,name:"Montre moderne",cat:"Accessoires",price:15000,emoji:"⌚",tag:"Style"},
+{id:9,name:"Écouteurs sans fil",cat:"Téléphones",price:9000,emoji:"🎧",tag:"Audio"},
+{id:10,name:"Lampe de maison",cat:"Maison",price:7500,emoji:"💡",tag:"Maison"},
+{id:11,name:"Veste décontractée",cat:"Habits",price:22000,emoji:"🧥",tag:"Mode"},
+{id:12,name:"Sac à dos",cat:"Accessoires",price:12500,emoji:"🎒",tag:"Pratique"}
+];
+let products=load("fm_products",seed);
+let cart=load("fm_cart",[]);
+let favorites=load("fm_favs",[]);
+let category="Tous";
+const symbols={XOF:"FCFA",USD:"$",EUR:"€",GBP:"£"};
+const rates={XOF:1,USD:1/600,EUR:1/656,GBP:1/760};
+function load(key,fallback){try{const v=JSON.parse(localStorage.getItem(key));return v??fallback}catch(e){return fallback}}
+function store(key,value){try{localStorage.setItem(key,JSON.stringify(value))}catch(e){}}
+function money(x){
+ const cur=document.getElementById("currency").value;
+ const n=x*rates[cur];
+ return cur==="XOF"?Math.round(n).toLocaleString("fr-FR")+" FCFA":symbols[cur]+" "+n.toLocaleString("en-US",{maximumFractionDigits:2});
+}
+function categories(){
+ const list=[["Tous","🌐"],["Habits","👕"],["Chaussures","👟"],["Téléphones","📱"],["Maison","🏠"],["Accessoires","🎒"]];
+ document.getElementById("categories").innerHTML=list.map(([name,emoji])=>
+ `<button class="cat ${category===name?"active":""}" onclick="choose('${name}')"><span class="emoji">${emoji}</span>${name}</button>`
+ ).join("");
+}
+function card(p){
+ const safeName=escapeHTML(p.name);
+ return `<article class="card"><div class="productpic"><span>${escapeHTML(p.emoji||"📦")}</span><span class="tag">${escapeHTML(p.tag||"Nouveau")}</span><button class="heart" onclick="toggleFav(${p.id})" aria-label="Ajouter aux favoris">${favorites.includes(p.id)?"❤️":"♡"}</button></div><div class="info"><h3>${safeName}</h3><div class="price">${money(p.price)}</div><div class="meta">🌍 Offre de démonstration · ${escapeHTML(p.cat)}</div><button class="add" onclick="addCart(${p.id})">Ajouter au panier</button></div></article>`;
+}
+function escapeHTML(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function renderProducts(){
+ const q=document.getElementById("search").value.trim().toLowerCase();
+ let list=products.filter(p=>(category==="Tous"||p.cat===category)&&(`${p.name} ${p.cat}`.toLowerCase().includes(q)));
+ const sort=document.getElementById("sort").value;
+ if(sort==="low")list.sort((a,b)=>a.price-b.price);
+ if(sort==="high")list.sort((a,b)=>b.price-a.price);
+ if(sort==="name")list.sort((a,b)=>a.name.localeCompare(b.name));
+ document.getElementById("catalogTitle").textContent=category==="Tous"?"Produits à découvrir":category;
+ document.getElementById("products").innerHTML=list.length?list.map(card).join():'<div class="empty">Aucun produit trouvé.</div>';
+ document.getElementById("favCount").textContent=favorites.length;
+ document.getElementById("cartCount").textContent=cart.reduce((s,p)=>s+p.qty,0);
+}
+function choose(c){category=c;home();categories();renderProducts();document.getElementById("catalog").scrollIntoView({behavior:"smooth"})}
+function home(){["homePage","favorites","cart","seller","checkout"].forEach(id=>document.getElementById(id).classList.add("hidden"));document.getElementById("homePage").classList.remove("hidden");window.scrollTo(0,0)}
+function show(id){["homePage","favorites","cart","seller","checkout"].forEach(x=>document.getElementById(x).classList.add("hidden"));document.getElementById(id).classList.remove("hidden");if(id==="favorites")renderFavorites();if(id==="cart")renderCart();window.scrollTo(0,0)}
+function toggleFav(id){favorites=favorites.includes(id)?favorites.filter(x=>x!==id):[...favorites,id];store("fm_favs",favorites);renderProducts();renderFavorites()}
+function renderFavorites(){const list=products.filter(p=>favorites.includes(p.id));document.getElementById("favoriteProducts").innerHTML=list.length?list.map(card).join():'<div class="empty">Tu n’as pas encore de favoris.</div>'}
+function addCart(id){const p=products.find(x=>x.id===id);if(!p)return;const f=cart.find(x=>x.id===id);if(f)f.qty++;else cart.push({...p,qty:1});store("fm_cart",cart);renderProducts();renderCart();alert("Produit ajouté au panier !")}
+function removeCart(id){cart=cart.filter(p=>p.id!==id);store("fm_cart",cart);renderCart();renderProducts()}
+function renderCart(){
+ document.getElementById("cartCount").textContent=cart.reduce((s,p)=>s+p.qty,0);
+ const el=document.getElementById("cartItems");
+ el.innerHTML=cart.length?cart.map(p=>`<div class="cartrow"><span>${escapeHTML(p.emoji)} ${escapeHTML(p.name)} × ${p.qty}<br><b>${money(p.price*p.qty)}</b></span><button onclick="removeCart(${p.id})">Retirer</button></div>`).join():'<div class="empty">Ton panier est vide.</div>';
+ document.getElementById("total").textContent=money(cart.reduce((s,p)=>s+p.price*p.qty,0));
+}
+function checkout(){if(!cart.length){alert("Ajoute d'abord un produit au panier.");return}show("checkout")}
+document.getElementById("sellerForm").addEventListener("submit",e=>{
+ e.preventDefault();
+ const name=document.getElementById("pname").value.trim();
+ const cat=document.getElementById("pcat").value;
+ const price=Number(document.getElementById("pprice").value);
+ const emoji=document.getElementById("pemoji").value.trim()||"📦";
+ if(!name||!Number.isFinite(price)||price<=0){alert("Vérifie le nom et le prix.");return}
+ const id=Date.now();
+ products.unshift({id,name,cat,price:price/rates[document.getElementById("currency").value],emoji,tag:"Ajouté"});
+ store("fm_products",products);e.target.reset();categories();renderProducts();home();alert("Produit ajouté à ce navigateur.");
+});
+document.getElementById("orderForm").addEventListener("submit",e=>{
+ e.preventDefault();
+ alert("Demande de démonstration préparée. Aucune commande réelle n'a été envoyée et aucun paiement n'a été effectué.");
+});
+categories();renderProducts();renderCart();
+</script>
+</body>
+</html>
